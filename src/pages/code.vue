@@ -4,11 +4,13 @@ import { getPageCountApi } from '~/api'
 
 const codeRefs = ref<HTMLElement[]>([])
 
-const data = await getPageCountApi()
+const data = 38
 const count = data as unknown as number
 
 function downloadCode() {
-  codeRefs.value.forEach((item, index) => {
+  codeRefs.value.forEach(async(item, index) => {
+    console.log(index)
+    await utilAwaitTime(1500)
     html2canvas(item, { backgroundColor: '#fff', scale: 1.5 }).then((canvas) => {
       const base64Img = canvas.toDataURL('image/png')
       utilDownloadBase64Image(base64Img, `${index + 1}.png`)
