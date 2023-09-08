@@ -2,7 +2,7 @@
 import { useQRCode } from '@vueuse/integrations/useQRCode'
 
 const { i } = defineProps<{ i: number }>()
-const url = `https://krd.scsee.cn/?page=${i}`
+const url = `http://47.108.187.69:80/#/?page=${i}`
 
 const qrcode = useQRCode(url, {
   errorCorrectionLevel: 'H',
@@ -12,6 +12,9 @@ const qrcode = useQRCode(url, {
 
 <template>
   <div class="w-40 h-40 border rounded">
+    <div v-if="$route.query.show">
+      {{ url }}
+    </div>
     <img :src="qrcode" class="w-full h-full" :title="url" :alt="`QR Code:${i + 1}`">
   </div>
 </template>
