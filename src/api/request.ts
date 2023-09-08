@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-export const baseURL = 'http://47.108.187.69:1000'
+export const baseURL = import.meta.env.DEV
+  ? 'http://47.108.187.69:1000'
+  : 'https://krd.scsee.cn/ft'
 
 const service = axios.create({
   baseURL,
