@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Pagination, Zoom } from 'swiper/modules'
 import 'swiper/css'
+import 'swiper/css/pagination'
 import { getPageFileCountApi } from '~/api'
 import { baseURL } from '~/api/request'
 
@@ -20,12 +22,18 @@ console.log(count, fileList)
 
 <template>
   <div>
-    <Swiper class="h-screen">
-      <SwiperSlide v-for="i in fileList" :key="i.name">
-        <div class="h-screen flex items-center">
-          <img :src="`${baseURL}${i.url}`" class="w-full">
+    <Swiper :modules="[Pagination, Zoom]" :pagination="true" :zoom="true" class="h-screen">
+      <SwiperSlide v-for="i in fileList" :key="i.name" class="flex items-center">
+        <div class="swiper-zoom-container">
+          <img :src="`${baseURL}${i.url}`">
         </div>
       </SwiperSlide>
     </Swiper>
   </div>
 </template>
+
+<style scoped>
+:deep(.swiper-pagination-bullet-active){
+  background-color: #3E9691;
+}
+</style>
